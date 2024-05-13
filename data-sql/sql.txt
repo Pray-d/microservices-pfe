@@ -1,0 +1,36 @@
+CREATE DATABASE mpfee;
+use mpfee;
+CREATE TABLE Employee(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255),
+    name VARCHAR(255)
+);
+
+CREATE TABLE Manager (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255),
+    name VARCHAR(255)
+);
+CREATE TABLE HR (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255),
+    name VARCHAR(255)
+);
+
+INSERT INTO HR (email, name) VALUES 
+('michael@fghsgloddiel.com', 'Michael Brown'),
+('sarah@fghsgloddiel.com', 'Sarah Williams'),
+('chris@fghsgloddiel.com', 'Chris Lee'),
+('emily@fghsgloddiel.com', 'Emily Davis');
+
+
+select * from Manager;
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE project_manager
+SET password = '123456';
+
+ALTER TABLE mpfee.input_data
+ADD timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE mpfee.input_data
+ADD COLUMN managerId int DEFAULT 0;
