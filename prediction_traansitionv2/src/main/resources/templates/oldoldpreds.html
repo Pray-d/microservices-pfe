@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictions</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="src/main/resources/static/app.css">
+</head>
+<body class="bg-amber-800">
+<div id="container" class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+    <h1 class="text-2xl font-bold text-gray-800 mb-4">Predictions</h1>
+    <form action="/predictions/update-all" method="post" class="mb-4">
+        <button type="submit" class="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Update All</button>
+    </form>
+    <form action="/predictions/deny-all" method="post" class="mb-4">
+        <button type="submit" class="bg-yellow-400 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Deny All</button>
+    </form>
+    <ul>
+        <!-- Display predictions -->
+        <th:block th:each="prediction, predictionIndex : ${predictions}">
+            <li id="predictionItem_${predictionIndex.index}" class="mb-2 bg-white p-4 rounded-lg shadow-md">
+                <!-- Display prediction -->
+                <span th:text="${prediction}" class="text-gray-800"></span>
+                <!-- Accept button -->
+                <form th:action="@{/predictions/update/{predictionName}(predictionName=${prediction})}" method="post" class="inline-block ml-2">
+                    <input type="hidden" name="action" value="accept">
+                    <button type="submit" class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Accept</button>
+                </form>
+                <!-- Deny button -->
+                <form th:action="@{/predictions/update/{predictionName}(predictionName=${prediction})}" method="post" class="inline-block ml-2">
+                    <input type="hidden" name="action" value="deny">
+                    <button type="submit" class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Deny</button>
+                </form>
+            </li>
+        </th:block>
+    </ul>
+
+    <script>
+        // Optional: You can use JavaScript to handle form submission success
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Perform any desired actions (e.g., show loading spinner)
+
+                // Submit the form via AJAX
+                fetch(form.action, {
+                    method: form.method,
+                    body: new FormData(form)
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            // If form submission is successful, delete the corresponding prediction element
+                            var index = form.parentNode.id.split('_')[1];
+                            var element = document.getElementById("predictionItem_" + index);
+                            element.parentNode.removeChild(element);
+                        } else {
+                            // Handle error response if needed
+                        }
+                    })
+                    .catch(error => {
+                        // Handle fetch error if needed
+                    });
+            });
+        });
+    </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{
+    "os": "Windows-10-10.0.19045-SP0",
+    "python": "3.11.1",
+    "heartbeatAt": "2024-04-15T17:54:45.823690",
+    "startedAt": "2024-04-15T17:54:43.221486",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "<python with no main file>",
+    "codePathLocal": null,
+    "host": "DESKTOP-P1L1RRD",
+    "username": "G15",
+    "executable": "c:\\Users\\G15\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "cpu_count": 6,
+    "cpu_count_logical": 12,
+    "cpu_freq": {
+        "current": 2688.0,
+        "min": 0.0,
+        "max": 2688.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2688.0,
+            "min": 0.0,
+            "max": 2688.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 468.00976181030273,
+            "used": 250.6764907836914
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 3050 Laptop GPU",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 3050 Laptop GPU",
+            "memory_total": 4294967296
+        }
+    ],
+    "memory": {
+        "total": 23.73709487915039
+    }
+}

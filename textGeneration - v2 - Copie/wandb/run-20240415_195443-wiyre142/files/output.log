@@ -1,0 +1,5 @@
+
+Total params : 1738596352 , trainable_params : 16187392 , trainable % : 0.931060966588293
+max_steps is given, it will override any value given in num_train_epochs
+c:\Users\G15\AppData\Local\Programs\Python\Python311\Lib\site-packages\trl\trainer\sft_trainer.py:342: UserWarning: You passed `packing=True` to the SFTTrainer, and you are training your model with `max_steps` strategy. The dataset will be iterated until the `max_steps` are reached.
+  warnings.warn(

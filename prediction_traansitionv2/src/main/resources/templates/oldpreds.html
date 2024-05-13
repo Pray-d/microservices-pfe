@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictions</title>
+</head>
+<body>
+<h1>Predictions</h1>
+<form action="/predictions/update-all" method="post">
+    <button type="submit">Update All</button>
+</form>
+<form action="/predictions/deny-all" method="post">
+    <button type="submit">Deny All</button>
+</form>
+<ul>
+    <!-- Display predictions -->
+    <th:block th:each="prediction, predictionIndex : ${predictions}">
+        <li id="predictionItem_${predictionIndex.index}">
+            <!-- Display prediction -->
+            <span th:text="${prediction}"></span>
+            <!-- Accept button -->
+            <form action="@{/predictions/update/{predictionName}(predictionName=${prediction})}" method="post">
+                <input type="hidden" name="action" value="accept">
+                <button type="submit">Accept</button>
+            </form>
+            <!-- Deny button -->
+
+                <button type="submit">Deny</button>
+
+        </li>
+    </th:block>
+</ul>
+
+<script>
+    // Optional: You can use JavaScript to handle form submission success
+    document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Perform any desired actions (e.g., show loading spinner)
+
+            // Submit the form via AJAX
+            fetch(form.action, {
+                method: form.method,
+                body: new FormData(form)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        // If form submission is successful, delete the corresponding prediction element
+                        var index = form.parentNode.id.split('_')[1];
+                        var element = document.getElementById("predictionItem_" + index);
+                        element.parentNode.removeChild(element);
+                    } else {
+                        // Handle error response if needed
+                    }
+                })
+                .catch(error => {
+                    // Handle fetch error if needed
+                });
+        });
+    });
+</script>
+</body>
+</html>

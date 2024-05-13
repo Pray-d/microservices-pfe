@@ -1,0 +1,1 @@
+2024/04/15 19:42:37 ERROR mlflow.utils.async_logging.async_logging_queue: Run Id d5c7a12710334dada470ec1333e048fa: Failed to log run data: Exception: Changing param values is not allowed. Param with key='per_device_train_batch_size' was already logged with value='100' for run ID='d5c7a12710334dada470ec1333e048fa'. Attempted logging new value '10'.
